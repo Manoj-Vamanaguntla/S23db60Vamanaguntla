@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p This is Manoj Vamanaguntla  #{title}
+  button(type="button", class="btn btn-secondary" ,onclick="doReduce()") Press me
+  div(id = "reduce") Reduce the value
+  a(href="van") LINK TO VAN
+  script.
+      count = 20
+      change  = -1
+      function doReduce(){
+          count = count + change;
+          change = change  - 1;
+          document.getElementById('reduce').innerHTML = 'Count '+ count +' Change ' + change;
+      }
