@@ -1,7 +1,5 @@
 # S23wb60Vamanaguntla
 
-This is Manoj. I like to play cricket
+assignment 11
 
-van_color(String)
-van_size(String)
-van_cost(Number)
+https://s23db60vamanaguntla.onrender.com
