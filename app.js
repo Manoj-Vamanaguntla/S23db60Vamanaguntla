@@ -3,12 +3,31 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var van = require("./models/van");
+
+require('dotenv').config();
+const connectionString =
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+{useNewUrlParser: true,
+useUnifiedTopology: true});
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")})
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var vanRouter = require('./routes/van');
 var boardRouter = require('./routes/board');
 var selectorRouter = require('./routes/selector');
+var resourceRouter = require('./routes/resource');
+
 
 
 var app = express();
@@ -28,6 +47,38 @@ app.use('/users', usersRouter);
 app.use('/van', vanRouter);
 app.use('/board', boardRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
+
+// We can seed the collection if needed on server start
+async function recreateDB(){
+  // Delete everything
+  await van.deleteMany();
+  let instance1 = new van({van_type:"ghost", van_size:'large',van_cost:25.4});
+instance1.save().then( () => {
+  console.log('First object saved');
+}).catch( (e) => {
+  console.log('There was an error', e.message);
+});
+
+  let instance2 =  new van({van_color:"black",van_size:"medium",van_cost:7000});
+  instance2.save().then( () => {
+    console.log('Second object saved');
+  }).catch( (e) => {
+    console.log('There was an error', e.message);
+  });
+
+  let instance3 = new van({van_type:"ghost", van_size:'large',van_cost:25.4});
+  instance3.save().then( () => {
+  console.log('Third object saved');
+}).catch( (e) => {
+  console.log('There was an error', e.message);
+});
+ }
+  
+  let reseed = true;
+  if (reseed) { recreateDB();}
+
+
 
 
 // catch 404 and forward to error handler
@@ -45,5 +96,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+
 
 module.exports = app;

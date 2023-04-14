@@ -2,10 +2,10 @@ extends layout
 
 block content
   h1= title
-   - let results = [{van_color:"red",van_size:"small",van_cost:"$4000"},{van_color:"black",van_size:"medium",van_cost:"$7000"},{van_color:"white",van_size:"large",van_cost:"$6000"}]
+   - let items = results
   div(class="container-fluid")
     div(class="row")
-      each item,index in results
+      each item,index in items
         div(class="col-sm-2",onClick=`buy(${index})`)
           p Color is #{item.van_color}
           p size is #{item.van_size}
