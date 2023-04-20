@@ -1,0 +1,26 @@
+extends layout
+
+block content
+ h1= title
+
+  if (toShow==null)
+   h2 No Instance to detail
+  else
+   - let vanid = toShow._id 
+   - let van_color = toShow.van_color 
+   - let van_size = toShow.van_size 
+   - let van_cost = toShow.van_cost
+    div 
+    div.row 
+      div(class='vanAttr mr-3') van id is: 
+      div #{vanid}
+       
+    div.row 
+      div(class='vanAttr mr-3') van color is: 
+      div #{van_color} 
+    div.row 
+      div(class='vanAttr mr-3')  van size is: 
+      div #{van_size} 
+    div.row 
+      div(class='vanAttr mr-3') van cost is: 
+      div #{van_cost}

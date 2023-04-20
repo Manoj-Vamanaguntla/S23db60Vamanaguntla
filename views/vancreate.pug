@@ -1,0 +1,33 @@
+extends layout
+block content
+    h1(class='b')= title
+    form(id='vanForm' action="/resource/vans" method="POST")
+    
+        div.form-group
+            label.vanAttr(for='van_color') van type
+            input#van_color(type='text' name='van_color')
+        div.form-group
+            label.vanAttr(for='van_size') van size
+            input#van_size(type='text' name='van_size')
+        div.form-group
+            label.vanAttr(for='van_cost') van cost
+            input#van_cost(type='number' name='van_cost')
+        input(type="submit")
+    script.
+      document.forms['vanForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+
+        fetch(event.target.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Save succeded")
+    // TODO handle body
+        }).catch((error) => {
+    // TODO handle error
+          alert("Save failed " + error )
+        });
+        });
