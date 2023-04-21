@@ -7,8 +7,11 @@ block content
    div(class="row m-1")
     each item,index in items
      - let destination = `dispatch(\"/van/update?id=${item._id}\")`
-     div(class="col-sm-3 bg-info m-2 p-4" onclick=`buy(${index})`) #{item.van_color} - #{item.van_size } - #{item.van_cost}
-      button.btn( class="btn-primary ml-1", onclick= destination) Update
+        div(class="row" onclick=`buy(${index})`)
+            div(class="col-sm-2") #{item.van_color}
+            div(class="col-sm-2") #{item.van_size} 
+            div(class="col-sm-2") #{item.van_cost}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
   script.
    function buy(itemNo)
    {

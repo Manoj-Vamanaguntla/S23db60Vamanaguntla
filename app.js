@@ -78,7 +78,7 @@ app.use('/resource', resourceRouter);
 async function recreateDB(){
   // Delete everything
   await van.deleteMany();
-  let instance1 = new van({van_type:"ghost", van_size:'large',van_cost:25.4});
+  let instance1 = new van({van_color:"red", van_size:'large',van_cost:25.4});
 instance1.save().then( () => {
   console.log('First object saved');
 }).catch( (e) => {
@@ -92,7 +92,7 @@ instance1.save().then( () => {
     console.log('There was an error', e.message);
   });
 
-  let instance3 = new van({van_type:"ghost", van_size:'large',van_cost:25.4});
+  let instance3 = new van({van_color:"white", van_size:'large',van_cost:20.4});
   instance3.save().then( () => {
   console.log('Third object saved');
 }).catch( (e) => {
